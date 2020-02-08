@@ -1,0 +1,67 @@
+@import "../common/common.css";
+.content {
+    position: relative;
+}
+.sidebar .sidebar-back {
+    z-index: 1;
+}
+.func-area .func-btn {
+    background:rgba(144,209,228,1);
+    box-shadow:0 1rem 2rem 0 rgba(144,209,228,0.5);
+    height: 2.5rem;
+    border-radius: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.2rem;
+    color: white;
+    font-size: 1.3rem;
+    margin-right: 1.5rem;
+    cursor: pointer;
+}
+.selected-box {
+    border: #B0BEC1 solid 0.05rem;
+    border-radius: 0.2rem;
+    padding: 0.35rem 3rem 0 0.2rem;
+    position: relative;
+    min-height: 2.8rem;
+}
+.selected-box>.arrow {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 2.8rem;
+}
+table .food-btn {
+    background-color: #FCF9F2;
+    height: 2.1rem;
+    border-radius: 2.05rem;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333333;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+td.time {
+    width: 9.15rem;
+    padding: 0 1.45rem;
+}
+
+.food-list {
+    position: absolute;
+    background-color: white;
+    box-shadow:0rem 1rem 1rem 0rem rgba(98,98,98,0.5);
+    max-height: 24rem;
+    overflow: scroll;
+}
+.food-list>.cell {
+    padding: 0.9rem 1.5rem;
+    border-bottom: #E5E5E5 0.05rem solid;
+}
+.food-list>.cell.active {
+    background-color: #F2F9FF;
+}

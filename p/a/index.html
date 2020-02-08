@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>小熊幼幼后台管理系统</title>
+    <link href="https:cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https:cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script src="https:cdn.bootcss.com/axios/0.19.0/axios.min.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="/c/a/square.css">
+
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+</head>
+<body>
+<div id="app" class="container-fluid full-height d-flex flex-column">
+    <navigator nickname="二大爷"></navigator>
+    <div class="d-content full-height d-flex">
+        <sidebar></sidebar>
+        <div class="content">
+            <div class="func-area d-flex align-items-center justify-content-between">
+                <div class="search d-flex align-items-center">
+                    <div class="search-bar d-flex align-items-center">
+                        <img src="/img/content/search.png" style="width: 1.1rem; height: 1.2rem;" alt>
+                        <div class="input-outer"><input class="fs-12 c-333" @keyup.enter="search" data-key="search_account"></div>
+                        <div class="fs-12 cl-333">账号</div>
+                    </div>
+                    <div class="search-bar d-flex align-items-center">
+                        <img src="/img/content/search.png" style="width: 1.1rem; height: 1.2rem;" alt>
+                        <div class="input-outer"><input class="fs-12 c-333" @keyup.enter="search" data-key="search_name"></div>
+                        <div class="fs-12 cl-333">姓名</div>
+                    </div>
+                    <div class="search-bar d-flex align-items-center">
+                        <img src="/img/content/search.png" style="width: 1.1rem; height: 1.2rem;" alt>
+<!--                        <div class="input-outer"><input class="fs-12 c-333" @keyup.enter="search" data-key="search_class"></div>-->
+                        <div class="input-outer">
+                            <select v-model="select_class" @change="search_class">
+                                <option :value="c.class_id" v-for="c in classes">{{c.class_name}}</option>
+                            </select>
+                        </div>
+                        <div class="fs-12 cl-333">班级</div>
+                    </div>
+                </div>
+                <div @click.stop="newTeacher"
+                     class="new-cell pointer fw-600 fs-15 d-flex align-items-center justify-content-center">新建
+                </div>
+            </div>
+            <div class="d-flex full-height" style="overflow: auto; border-radius: 1rem;">
+                <table>
+                    <tr>
+                        <th v-for="th in ths">{{th}}</th>
+                    </tr>
+                    <tr v-for="(row,idx) in teachers" :class="idx%2==0?'white':'blue'">
+                        <td class="number border-right">{{row.teacher_id}}</td>
+                        <td class="account border-right">{{row.teacher_account}}</td>
+                        <td class="name border-right">{{row.teacher_name}}</td>
+                        <td class="cls border-right">{{row.class_name}}</td>
+                        <td class="gender border-right">{{row.teacher_gender==1?'男':'女'}}</td>
+                        <td class="age border-right">{{row.teacher_age}}</td>
+                        <td class="phone border-right">{{row.teacher_phone}}</td>
+                        <td class="address border-right">{{row.teacher_address}}</td>
+                        <td class="graduate border-right">{{row.teacher_graduate}}</td>
+                        <td class="funcBtn">
+                            <div class="full-width d-flex justify-content-between">
+                                <div class="pointer edit" @click.stop="editTeacher" :data-idx="idx"><img
+                                        src="/img/cell/edit.png"
+                                        style="width: 14px; height: 14px;"
+                                        alt></div>
+                                <div class="pointer delete" @click.stop="deleteAlert.isShow=true;deleteAlert.idx=idx;"
+                                     :data-idx="idx"><img src="/img/cell/delete.png"
+                                                          style="width: 14px; height: 14px;"
+                                                          alt></div>
+                                <div class="pointer lock" @click.stop="resetAlert.isShow=true;resetAlert.idx=idx;" :data-number="row.number"><img src="/img/cell/lock.png"
+                                                                                         style="width: 14px; height: 14px;"
+                                                                                         alt></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!--            -->
+            <alert v-if="editAlert.isShow" :showcancel="false" @submit="submitTeacher" @close="editAlert.isShow=false">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <div class="row"><label class="title-input-title">账号：<input class="title-input-input"
+                                                                                    v-model="editAlert.account"></label>
+                        </div>
+                        <div class="row"><label class="title-input-title">年龄：<input class="title-input-input"
+                                                                                    v-model="editAlert.age"></label>
+                        </div>
+                        <div class="row d-flex align-items-start"><label class="title-input-title">住址：</label><textarea
+                                class="title-input-input" rows="1" v-model="editAlert.address"></textarea></div>
+                    </div>
+                    <div>
+                        <div class="right row"><label class="title-input-title">姓名：<input class="title-input-input"
+                                                                                          v-model="editAlert.name"></label>
+                        </div>
+                        <div class="right row d-flex align-items-center justify-content-between">
+                            <label class="title-input-title">性别：</label>
+                            <div class="radio-container d-flex align-items-center justify-content-around">
+                                <input type="radio" :checked="editAlert.gender=='男'" name="gender" id="male" value="男"
+                                       v-model="editAlert.gender"><label for="male">男</label>
+                                <input type="radio" :checked="editAlert.gender=='女'" name="gender" id="female" value="女"
+                                       v-model="editAlert.gender"><label for="female">女</label>
+                            </div>
+                        </div>
+                        <div class="right row"><label class="title-input-title">电话：<input class="title-input-input"
+                                                                                          v-model="editAlert.phone"></label>
+                        </div>
+                        <div class="right row d-flex align-items-start"><label
+                                class="title-input-title">毕业：</label><textarea
+                                class="title-input-input" v-model="editAlert.graduate"></textarea></div>
+                    </div>
+                </div>
+            </alert>
+            <!--            新建成功-->
+            <alert v-if="successAlert.isShow" :showcancel="false" @submit="successAlert.isShow=false">
+                <div><img src="/img/alert/success.png" style="width: 10rem; height: 10rem;" alt></div>
+                <div class="alert-title">{{successAlert.type}}教职工账号成功</div>
+                <div v-if="successAlert.type != '修改'" class="account-info d-flex align-items-center">
+                    <div class="account fs-12" style="color: #19465F">账号：{{successAlert.account}}</div>
+                    <div class="password fs-12" style="color: #19465F">密码：{{successAlert.password}}</div>
+                    <div class="copy pointer" @click.stop="copy"
+                         :data-text="'账号:'+successAlert.account+'   密码:'+successAlert.password">复制
+                    </div>
+                </div>
+                <div v-if="successAlert.type != '修改'" class="prompt">*密码仅展示一次，请妥善保管</div>
+            </alert>
+            <!--            删除教师-->
+            <delete-alert v-if="deleteAlert.isShow"
+                          title="你确定删除此教职工"
+                          content="删除后不可找回，请谨慎操作"
+                          @close="deleteAlert.isShow=false"
+                          @submit="delTeacher">
+            </delete-alert>
+            <!--            重置密码-->
+            <alert v-if="resetAlert.isShow" @close="resetAlert.isShow=false" @submit="resetTeacher">
+                <div><img src="/img/alert/safe_warn.png" style="width: 8.5rem; height: 9.5rem;"></div>
+                <div class="alert-title">你确定要重置该账户密码</div>
+                <div class="alert-detail">重置密码后原密码将不可用，请谨慎操作</div>
+            </alert>
+            <pagination current="2" max="3" @action="gotopage">
+            </pagination>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/v/v-cv.js"></script>
+<script type="module" src="/j/a/index.js"></script>
+</html>

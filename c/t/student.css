@@ -1,0 +1,72 @@
+@import "/c/common/common.css";
+
+.content {
+    padding: 3rem !important;
+}
+.content>.table {
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+.alert .wechat-show .add-btn {
+    background-color: #90D1E4;
+    width: 4rem;
+    height: 1.9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    color: white;
+    border-radius: 0.2rem;
+    cursor: pointer;
+}
+.alert .wechat-show .guardian-cell {
+    margin-right: 1.45rem;
+}
+.alert .wechat-show.family {
+    margin-top: 3rem;
+}
+
+.alert.add-wechat .search-area {
+    background-color: #F2F6F7;
+    padding: 0 1rem;
+}
+.alert.add-wechat .search input {
+    width: 15rem;
+    height: 2.4rem;
+    background-color: rgba(0,0,0,0);
+}
+
+.alert.add-wechat .search .search-btn {
+    width: 6rem;
+    height: 2.4rem;
+    background-color: #90D1E4;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1.2rem;
+    margin-left: 2rem;
+}
+.alert.add-wechat .collection {
+    margin-top: 1.85rem;
+}
+.alert.add-wechat .collection .item {
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+.alert.add-wechat .id {
+    color: #FF95AA;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+.alert.add-wechat .alert-content {
+    max-width: 45rem;
+    padding: 3rem !important;
+}
+.alert .report-show .table {
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+.alert .report-show .table .date {
+    min-width: 34.75rem;
+}

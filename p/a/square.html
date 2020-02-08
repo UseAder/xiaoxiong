@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>小熊幼幼后台管理系统</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.19.0/axios.min.js"></script>
+
+    <link rel="stylesheet" href="/c/a/square.css">
+
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+</head>
+<body>
+<div id="app" class="container-fluid full-height d-flex flex-column">
+    <navigator nickname="二大爷"></navigator>
+    <div class="d-content full-height d-flex">
+        <sidebar></sidebar>
+        <div class="content">
+            <div class="table-back full-height full-width">
+                <table>
+                    <tr>
+                        <th v-for="t in ths">{{t}}</th>
+                    </tr>
+                    <tr v-for="(i, idx) in 10" :class="idx%2==0?'white':'blue'">
+                        <td class="number border-right">{{cell.number}}</td>
+                        <td class="issue border-right">
+                            <user-info avatar="" nickname="小熊幼幼" time="2019-12-12 12:12"></user-info>
+                        </td>
+                        <td class="content border-right">{{cell.content}}</td>
+                        <td class="photos border-right">
+                            <div class="d-flex">
+                                <img v-for="i in cell.images"
+                                     style="height: 3.97rem; width: 3.97rem; background-color: #eee;">
+                            </div>
+                        </td>
+                        <td class="funcBtn">
+                            <div class="full-width d-flex justify-content-between">
+                                <div class="pointer" @click="funcAction" :data-type="btn" :class="btn"
+                                     v-for="(btn, idx) in cell.funcBtn"><img :src="'/img/cell/'+btn+'.png'" alt=""
+                                                                             style="width: 14px; height: 14px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <delete-alert v-if="showDelete" :obj="cell" title="1234" content="4321" @submit="deleteSubmit"
+                          @close="deleteClose"></delete-alert>
+            <submit-alert v-if="showSubmit" show="1234" @close="editClose" @submit="editSubmit">
+                <div class="d-flex flex-column align-items-start">
+                    <user-info avatar="" nickname="小熊幼幼" time="2019-12-12 12:12"></user-info>
+                    <div class="edit-slot d-flex align-items-start">
+                        <div class="fs-14 cl-333">内容：</div>
+                        <textarea class="fs-15" disabled></textarea>
+                    </div>
+                </div>
+            </submit-alert>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../../v/v-cv.js"></script>
+<script src="/j/a/square.js"></script>
+</html>

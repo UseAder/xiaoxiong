@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>小熊幼幼后台管理系统</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.19.0/axios.min.js"></script>
+
+    <link rel="stylesheet" href="/c/a/setting.css">
+
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+</head>
+<body>
+<div id="app" class="container-fluid full-height d-flex flex-column">
+    <navigator nickname="二大爷"></navigator>
+    <div class="d-content full-height d-flex">
+        <sidebar></sidebar>
+        <div class="content">
+            <!--            导航-->
+            <div v-if="funcShow" class="func-area d-flex">
+                <div v-for="(option, idx) in options" @click="titleFuncBtnAction" :data-idx="idx"
+                     class="btn pointer d-flex align-items-center justify-content-center"
+                     :style="'background-color:'+option.bgColor">
+                    <img :src="'/img/setting/'+option.img+'.png'" style="width: 2.65rem; height: 2.65rem" alt>
+                    <div class="fs-18" style="margin-left: 1rem">{{option.text}}</div>
+                </div>
+            </div>
+            <!--            面包屑-->
+            <div v-if="!funcShow" class="breadcrumb">
+                <span class="pointer" @click="breadcrumbAction" data-href="/p/a/setting.html">系统配置</span>><span>{{breadcrumb[funcIdx].text}}</span>
+            </div>
+            <!--            全部公告-->
+            <div v-if="funcIdx==-1" class="table-back full-height overflow-auto">
+                <table>
+                    <tr>
+                        <th v-for="th in ths" class="text-center">{{th}}</th>
+                    </tr>
+                    <tr v-for="c in tdCount" :class="c%2==0?'white':'blue'">
+                        <td class="number border-right">{{td.number}}</td>
+                        <td class="title-time border-right"><span>{{td.title}}</span><br/><span>{{td.time}}</span></td>
+                        <td class="description border-right">{{td.description}}</td>
+                        <td class="content border-right">{{td.content}}</td>
+                        <td class="funcBtn">
+                            <div class="full-width d-flex justify-content-between">
+                                <div v-for="c in td.funcBtn" :data-number="td.number" :data-type="c"
+                                     @click="funcBtnAction" class="pointer" :class="c"><img
+                                        :src="'/img/setting/'+c+'.png'" style="width: 1.2rem; height: 1.2rem;" alt>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!--            关于我们-->
+            <div v-if="funcIdx==0" class="about">
+                <div class="d-flex justify-content-end">
+                    <div class="edit d-flex align-items-center justify-content-center pointer" @click="aboutEdit">编辑
+                    </div>
+                </div>
+                <div class="table">
+                    <table>
+                        <tr v-for="about in abouts" class="border-bottom">
+                            <td class="title">{{about.title}}</td>
+                            <td class="content" v-if="about.type=='text'">{{about.text}}</td>
+                            <td class="content" v-else><img :src="about.image" style="width: 18.75rem; height:5rem;">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!--            关注我们-->
+            <div v-if="funcIdx==1" class="attention">
+                <div class="d-flex ">
+                    <img :src="qrCode" @click="selectQrcode"
+                         style="width: 15rem; height: 15rem; background-color: #eee;">
+                    <div class="pointer bg-light-blue change" @click="selectQrcode">更换</div>
+                    <input ref="qrcode" type="file" @change="qrcodeChanged" hidden>
+                </div>
+                <div class="submit pointer" @click="qrSubmit">确定</div>
+                <div class="cancel pointer" @click="cancel">取消</div>
+            </div>
+            <!--            新建公告-->
+            <div v-if="funcIdx==2" class="notice full-height overflow-auto">
+                <div class="cell title">
+                    <label for="attention-title">标题：</label>
+                    <input id="attention-title" class="fs-12" placeholder="请输入公告标题">
+                </div>
+                <div class="cell description d-flex align-items-start">
+                    <label for="attention-description">描述：</label>
+                    <textarea type="text" id="attention-description" class="fs-12"
+                              placeholder="请输入公告描述，用于公告列表展示"></textarea>
+                </div>
+                <div class="cell content d-flex align-items-start">
+                    <label for="attention-content">内容：</label>
+                    <textarea type="text" id="attention-content" class="fs-12"
+                              placeholder="请输入公告描述，用于公告列表展示"></textarea>
+                </div>
+                <div class="d-flex align-items-end">
+                    <div class="submit pointer" @click="noticeSubmit">确定</div>
+                    <div class="cancel pointer" @click="cancel">取消</div>
+                </div>
+            </div>
+            <!--            关于我们编辑-->
+            <div v-if="funcIdx==3" class="about-edit full-height overflow-auto">
+                <div class="cell address">
+                    <label for="about-address">园区地址：</label>
+                    <input type="text" id="about-address" class="fs-12" placeholder="请输入园区地址">
+                </div>
+                <div class="cell phone">
+                    <label for="about-phone">园区电话：</label>
+                    <input type="text" id="about-phone" class="fs-12" placeholder="请输入园区电话">
+                </div>
+                <div class="cell logo d-flex">
+                    <label>顶部图片：</label>
+                    <div class="d-flex">
+                        <img :src="noticeEditLogoUrl" style="width: 18.75rem; height: 5rem;">
+                        <div class="change pointer" @click="noticeLogoEdit">更换</div>
+                    </div>
+                    <input type="file" ref="noticeLogoEdit" @change="noticeLogoEdited" hidden>
+                </div>
+                <div class="cell description d-flex align-items-start">
+                    <label for="about-description">园区介绍：</label>
+                    <textarea id="about-description"></textarea>
+                </div>
+                <div class="d-flex align-items-end">
+                    <div class="submit pointer" @click="noticeSubmit">确定</div>
+                    <div class="cancel pointer" @click="cancel">取消</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../v/v-cv.js"></script>
+<script src="/j/a/setting.js"></script>
+</body>
+</html>

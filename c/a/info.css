@@ -1,0 +1,50 @@
+@import "../common/common.css";
+
+.content {
+    padding-top: 2.95rem;
+}
+.content .title {
+    font-size: 0.9rem;
+}
+.content .info {
+    margin-top: 3rem;
+    padding: 3.2rem;
+    background-color: white;
+    width: 35.65rem;
+    box-shadow:0 0 1rem 0 rgba(232,236,237,0.4);
+    border-radius:1rem;
+}
+.content .avatar {
+    margin-right: 3.8rem;
+}
+.content .hi {
+    padding-bottom: 0.5rem;
+}
+.content .welcome {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.content .account {
+    font-size: 1.2rem;
+    color: #333;
+}
+.content .change-pwd {
+    background-color: #F2F9FF;
+    color: #19465F;
+    font-size: 0.9rem;
+    padding: 0.15rem 0.2rem;
+    margin-left: 0.35rem;
+}
+.content .base {
+    margin-top: 3.3rem;
+}
+.content .change-info {
+    color: #19465f;
+    margin-left: 0.95rem;
+}
+.content .base-title {
+    margin-bottom: 1.65rem;
+}
+.content .base-cell {
+    margin-bottom: 1.2rem;
+}

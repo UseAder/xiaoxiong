@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>小熊幼幼后台管理系统</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.19.0/axios.min.js"></script>
+
+    <link rel="stylesheet" href="/c/a/trend.css">
+
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+</head>
+<body>
+<div id="app" class="container-fluid full-height d-flex flex-column">
+    <navigator nickname="二大爷"></navigator>
+    <div class="d-content full-height d-flex">
+        <sidebar></sidebar>
+        <div class="content">
+            <div class="func-area d-flex align-items-end justify-content-between">
+                <div class="search">
+                    <search-bar text="班级"></search-bar>
+                </div>
+                <a href="/p/a/leave.html"><div class="day-off d-flex align-items-center justify-content-center">
+                    <img src="/img/trend/icon.png" style="width: 2.4rem;height: 2.7rem;">
+                    <div class="text fs-18">请假(1)</div>
+                </div></a>
+            </div>
+            <div class="table full-height overflow-auto">
+                <table>
+                    <tr><th v-for="(th, idx) in ths" :class="idx===0?'left':'border-right'">{{th}}</th></tr>
+                    <tr v-for="i in 10">
+                        <td class="avatar left">
+                            <img :src="tr.avatar" style="width: 7.5rem; height: 7.5rem; background-color: #eee; border-radius: 3.75rem;">
+                            <div>{{tr.name}}</div>
+                        </td>
+                        <td class="today border-right" v-html="tr.today"></td>
+                        <td class="process border-right">
+                            <div class="d-flex flex-wrap">
+                                <div class="card" v-for="p in tr.process">
+                                    <div>{{p.time}}</div>
+                                    <div>{{p.action}}</div>
+                                    <div>{{p.status}}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="love">
+                            <div>{{tr.love}}</div>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/v/v-cv.js"></script>
+<script src="/j/a/trend.js"></script>
+</html>

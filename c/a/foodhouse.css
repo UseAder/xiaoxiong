@@ -1,0 +1,23 @@
+@import "../common/common.css";
+
+.collection>.cell {
+    box-shadow:0 0 1rem 0 rgba(232,236,237,0.4);
+    border-radius:1rem;
+    width: 11.25rem;
+    margin-right: 1.5rem;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    height: 14.7rem;
+}
+
+.collection>.cell>.name {
+    padding: 1.25rem;
+    background-color: white;
+}
+.photo-row {
+    margin-top: 1rem;
+}
+.photo-row img.no-img {
+    padding: 4.45rem;
+    background-color: #eee;
+}

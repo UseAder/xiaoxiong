@@ -1,0 +1,41 @@
+@import "../common/common.css";
+
+td.number {
+    min-width: 3rem;
+}
+td.cls_name,
+td.m_tc,
+td.o_tc,
+td.total {
+    min-width: 10.8rem;
+    padding: 2rem;
+}
+
+.alert table {
+    background-color: white;
+}
+.alert .alert-content.clear {
+    padding-left: 0;
+    padding-right: 0;
+    height: 80%;
+}
+.alert .table-container {
+    max-height: 90%;
+    overflow: scroll;
+    border-radius: 1rem;
+    max-width: 100%;
+}
+td {
+    padding: 1.45rem 1.5rem;
+    font-size: 0.9rem;
+    min-width: 9rem;
+}
+td.avatar {
+    padding: 0.45rem 0.5rem;
+}
+
+.add-line {
+    width: 1.4rem;
+    height: 1.4rem;
+    margin-left: 1.45rem;
+}

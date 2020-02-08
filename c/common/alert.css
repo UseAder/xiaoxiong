@@ -1,0 +1,169 @@
+/*弹窗*/
+.alert {
+    background-color: rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+}
+.alert .alert-content {
+    background-color: white;
+    border-radius: 1rem;
+    padding: 4rem 9rem 4rem 9rem;
+    position: relative;
+    overflow: hidden;
+}
+.alert .alert-content.clear {
+    background-color: rgba(0,0,0,0);
+}
+.alert .alert-content.clear {
+    padding-right: 0;
+}
+.alert .row {
+    margin-top: 2rem;
+}
+.alert .right {
+    margin-left: 8.8rem;
+}
+.alert .title-input-title {
+    font-size: 1.4rem;
+    color: #333;
+}
+.alert .title-input-input,
+.alert select{
+    width: 15rem;
+    height: 2.4rem;
+    padding: 0 1.06rem;
+    color: #333;
+    background-color: #F5F5F5;
+    border-radius: 0.1rem !important;
+}
+.alert select {
+    border: none;
+}
+.alert .radio-container {
+    width: 15rem;
+    height: 2.4rem;
+}
+
+.alert .radio-container input[type="radio"] {
+    display: none;
+}
+.alert .radio-container input[type="radio"]+label {
+    background: url("/img/teacher/dradio.png") no-repeat left / 20px 20px;
+    padding: 10px 0 10px 40px;
+    font-size: 18px;
+}
+.alert .radio-container input:checked[type="radio"]+label {
+    background: url("/img/teacher/sradio.png") no-repeat left / 20px 20px;
+}
+.alert textarea {
+    width: 15rem;
+    min-height: 4.25rem;
+    padding: 0.3rem 1.06rem !important;
+}
+
+.alert .alert-close {
+    background-color: #90D1E4;
+    border-bottom-left-radius: 1rem;
+    width: 3.5rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+.alert .alert-content.clear .alert-close {
+    border-radius: 1rem;
+}
+.alert .submit {
+    font-size: 1.4rem;
+}
+
+.alert .account-info {
+    height: 3rem;
+    margin-top: 1.5rem;
+}
+.alert .account-info>.account,
+.alert .account-info>.password {
+    background-color: #F5F5F5;
+    padding: 0 1rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.alert .account-info>.copy {
+    background-color: #F2F9FF;
+    cursor: pointer;
+    width: 5.1rem;
+    height: 2.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #19465F;
+    font-size: 1.2rem;
+}
+.alert .prompt {
+    margin-top: 0.5rem;
+    color: #999;
+}
+.alert.complete .submit {
+    margin-top: 1.45rem;
+}
+.alert .submit {
+    width: 19rem;
+    height: 3.4rem;
+    border-radius: 1.7rem;
+    background-color: #90D1E4;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4rem;
+}
+.alert .alert-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.alert .alert-title {
+    font-size: 1.8rem;
+    margin-top: 2.85rem;
+    color: #333;
+}
+.alert .alert-detail {
+    font-size: 1.2rem;
+    margin-top: 0.95rem;
+    color: #999;
+}
+.alert .alert-funcs>div {
+    width: 15rem;
+    height: 3.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5.2rem;
+    border-radius: 1.7rem;
+}
+.alert .alert-funcs>.complete {
+    background-color: #90D1E4;
+    color: #fff;
+}
+.alert .alert-funcs>.cancel {
+    border: #19465F solid 2px;
+    margin-left: 5rem;
+}
+
+.alert .cell {
+    margin-top: 2rem;
+}

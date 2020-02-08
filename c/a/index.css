@@ -1,0 +1,26 @@
+@import "../common/common.css";
+td {
+    padding: 0.85rem 2rem;
+    min-height: 5rem;
+}
+td.number {
+    min-width: 3rem;
+}
+td.account,
+td.name,
+td.cls {
+    min-width: 7.55rem;
+}
+td.gender,
+td.age {
+    min-width: 4.95rem;
+}
+td.phone {
+    min-width: 10.45rem;
+}
+td.address,
+td.graduate {
+    min-width: 13.05rem;
+}
+
+

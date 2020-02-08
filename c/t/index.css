@@ -1,0 +1,265 @@
+@import "/c/common/common.css";
+
+.content {
+    padding-left: 3rem !important;
+}
+
+td.applier {
+    min-width: 15rem;
+}
+
+.func-area .card {
+    padding: 0 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 3rem;
+    flex-direction: row;
+    background-color: rgba(0,0,0,0);
+    border: none;
+    font-size: 1.8rem;
+    width: 21.5rem;
+    height: 7.25rem;
+    border-radius: 1rem;
+    box-shadow:0 0 1rem 0 rgba(232,236,237,0.4);
+    cursor: pointer;
+}
+.func-area .card.leave {
+    background-color: #FFE5E9;
+}
+.func-area .card.student {
+    background-color: #E5F1FF;
+}
+.func-area .card.report {
+    background-color: #E6FFE5;
+}
+
+
+th {
+    background-color: #FCF9F2;
+    color: #333333;
+    font-size: 0.9rem;
+    border-right: none !important;
+}
+
+th.left {
+    background-color: #90D1E4;
+    box-shadow:0rem 0rem 1rem 0rem rgba(144,209,228,0.5);
+    position: relative;
+    z-index: 1;
+}
+
+th.border-right {
+    border-right: #6CE0FF solid 1px !important;
+}
+
+td {
+    background-color: white;
+}
+
+td.left {
+    background-color: #90D1E4;
+    border-top: none !important;
+    box-shadow:0rem 0rem 1rem 0rem rgba(144,209,228,0.5);
+    position: relative;
+    z-index: 1;
+}
+
+td.border-right {
+    border-right: #6CE0FF solid 1px !important;
+}
+
+td.avatar {
+    width: 10.5rem;
+    color: white;
+    font-size: 1.2rem;
+}
+
+td.today {
+    text-align: left;
+    min-width: 12rem;
+}
+
+td.today p {
+    margin: 0;
+    padding: 0;
+    font-size: 0.9rem;
+}
+
+td.process .card {
+    background-color: #F2F9FF;
+    border-radius: 1rem;
+    margin-right: 1rem;
+    border: none;
+    padding: 1rem;
+    text-align: left;
+    font-size: 1.2rem;
+    min-width: 6rem;
+    min-height: 9.4rem;
+    margin-bottom: 1rem;
+}
+
+td.love {
+    width: 12rem;
+    margin-right: 0 !important;
+}
+
+td .send {
+    background-color: #90D1E4;
+    width: 7rem;
+    height: 2.5rem;
+    border-radius: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+td .sent {
+    background-color: #8F8F8F;
+    width: 7rem;
+    height: 2.5rem;
+    border-radius: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+td .signin {
+    width:7rem;
+    height:2.5rem;
+    background:rgba(0,196,186,1);
+    border-radius:1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+}
+
+td .gotolove {
+    background-color: #FF95AA;
+    width: 7rem;
+    height: 2.5rem;
+    border-radius: 1.25rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.alert.love .loveInsert {
+    width: 37rem;
+    height: 10.85rem;
+    border: #B0BEC1 1px solid;
+}
+.alert.love .complete {
+    background-color: #90D1E4;
+    width: 10rem;
+    height: 3.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 1.7rem;
+    margin-left: 5.1rem;
+}
+.alert.love .alert-content {
+    max-width: 70.1rem;
+}
+.alert.love .table {
+    max-height: 20rem;
+    overflow: auto;
+}
+.alert.love td {
+    text-align: left;
+    padding: 1.25rem 0;
+    border-bottom: #E5E5E5 solid 1px;
+}
+td {
+    border-top: none !important;
+}
+
+
+
+.alert.signin .cancel,
+.alert.signin .submit {
+    width: 9rem;
+    height: 3.4rem;
+    border-radius: 1.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.alert.signin .submit {
+    background-color: #90D1E4;
+    margin-left: 3rem;
+}
+.alert.signin .cancel {
+    width: 4.5rem;
+}
+.alert.signin .alert-content {
+    padding: 3rem;
+    min-width: 44rem;
+}
+.alert.signin .bg-light {
+    margin-left: .5rem;
+    padding: .1rem .6rem;
+}
+
+.alert.action .alert-content {
+    min-width: 64.1rem;
+    padding: 3rem;
+}
+.alert.action .type {
+    width: 7rem;
+    height: 7rem;
+    justify-content: space-evenly;
+    cursor: pointer;
+    margin-right: 1.5rem;
+    border: white solid .1rem;
+}
+.alert.action .type.active {
+    background-color: #F2F9FF;
+    border: #90D1E4 solid 0.1rem;
+    border-radius: .5rem;
+}
+
+.action-row {
+    margin-top: 3rem;
+}
+.action-row .radio-container {
+    margin-right: 5rem;
+    width: auto;
+}
+.action-row>.radio-container>input {
+    padding: .2rem .6rem;
+    margin-left: .5rem;
+}
+.action-row .title {
+    margin-right: 2.7rem;
+    font-size: 1.5rem;
+    color: #333333;
+}
+.action-row .time-input {
+    width: 4rem;
+    height: 1.9rem;
+    margin-right: 0.85rem;
+    margin-left: .85rem;
+}
+
+.alert .action-sleep-sep {
+    width: 3rem;
+    height: .12rem;
+    background-color: #90D1E4;
+    margin: 0 2rem;
+}
+
+#action-sleep-reason {
+    width: 19.7rem;
+    height: 3rem;
+    background-color: #F5F5F5;
+    margin-top: 1rem;
+}

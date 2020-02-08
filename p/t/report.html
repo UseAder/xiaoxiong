@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+
+    <script src="/v/cj.js"></script>
+    <script src="https://cdn.bootcss.com/html2canvas/0.5.0-alpha2/html2canvas.min.js"></script>
+
+    <link rel="stylesheet" href="/c/t/report.css">
+</head>
+<body>
+
+<div id="app" class="container-fluid full-height d-flex flex-column">
+    <navigator nickname="二大爷"></navigator>
+    <div class="d-content full-height d-flex">
+        <div class="content">
+            <div class="d-flex justify-content-around">
+                <div class="result" id="result" ref="result">
+<!--                    月/名字-->
+                    <div style="position: absolute; left: 170px; top: 40px; font-size: 46px; font-weight: 700; color: #0C7692;">{{info.month?info.month:'___'}}月</div>
+                    <div class="position-absolute" style="color: #F3A7B4; left: 350px; top: 36px; font-size: 50px; display: flex; align-items: center;">
+                        {{info.name?info.name:'___'}}
+                        <img src="/img/report/p_heart.png" style="width: 44px; height: 38px; margin-left: 10px" alt="">
+                    </div>
+<!--                    身高体重小名-->
+                    <div style="font-size: 30px; color: #8FC31F; position: absolute; left: 165px; top: 253px;">身体成长数据</div>
+                    <div style="left: 201px; top: 319px;color: #97C72E; font-size: 22px; position:absolute">身高</div>
+                    <div style="left: 348px; top: 319px;color: #97C72E; font-size: 22px; position:absolute;">体重</div>
+                    <div style="left: 197px; top: 365px;color: #97C72E; font-size: 22px; position:absolute;">{{info.height?info.height:'___'}} cm</div>
+                    <div style="left: 341px; top: 365px;color: #97C72E; font-size: 22px; position:absolute;">{{info.weight?info.weight:'___'}} kg</div>
+                    <div style="left: 547px; top: 346px;color: #ffffff; font-size: 26px; position:absolute;transform: rotate(-20deg); -webkit-transform: rotate(-20deg)">{{info.petName}}</div>
+<!--                    日常生活记录-->
+                    <div style="left: 157px; top: 525px;color: #97C72E; font-size: 30px; position:absolute; font-weight: 600;">
+                        日常生活记录
+                    </div>
+<!--                    饮食-->
+                    <div style="left: 194px; top: 595px;color: #595757; font-size: 18px; position:absolute; font-weight: 500;">
+                        日托时间内饮食
+                    </div>
+                    <div style="left: 149px; top: 639px;color: #595757; font-size: 16px; position:absolute; font-weight: 400; width: 436px;">
+                        每天正餐1次，每次以<span class="input-join">{{info.mainFood?info.mainFood:'___'}}</span>为主，
+                        每次奶量<span class="input-join">{{info.milkCount?info.milkCount:'___'}}</span>CC，
+                        另外添加副食品，{{info.petName?info.petName:'宝宝'}}喜欢吃<span class="input-join">{{info.loveFood?info.loveFood:'___'}}</span>等食物。
+                        {{info.petName?info.petName:'宝宝'}}<span class="input-join">{{info.canUseSpoon?info.canUseSpoon:'___'}}</span>自己拿勺吃饭，
+                        吃饭习惯<span class="input-join">{{info.eatHabit?info.eatHabit:'___'}}</span>。
+                    </div>
+                    <div style="left: 149px; top: 720px;color: #595757; font-size: 16px; position:absolute; font-weight: 400; width: 436px;">
+                        每天点心 2 次，每次{{info.petName?info.petName:'宝宝'}}都能吃完。
+                    </div>
+<!--                    睡眠-->
+                    <div style="left: 194px; top: 776px;color: #595757; font-size: 18px; position:absolute; font-weight: 500;">
+                        睡眠
+                    </div>
+                    <div style="left: 149px; top: 814px;color: #595757; font-size: 16px; position:absolute; font-weight: 400; width: 436px;">
+                        {{info.petName?info.petName:'宝宝'}}白天在小熊馆睡 1 次 ，
+                        每次睡眠时间平均为<span class="input-join">{{info.sleepTime?info.sleepTime:'___'}}</span>分钟，
+                        {{info.petName?info.petName:'宝宝'}}在小熊馆<span class="input-join">{{info.sleepStatus?info.sleepStatus:'___'}}</span>。
+                    </div>
+<!--                    如厕记录-->
+                    <div style="left: 194px; top: 882px;color: #595757; font-size: 18px; position:absolute; font-weight: 500;">
+                        如厕记录
+                    </div>
+                    <div style="left: 149px; top: 916px;color: #595757; font-size: 16px; position:absolute; font-weight: 400; width: 436px;">
+                        {{info.petName?info.petName:'宝宝'}}白天一共换<span class="input-join">{{info.urineCount?info.urineCount:'___'}}</span>次尿不湿，
+                        便便<span class="input-join">{{info.dungStatus?info.dungStatus:'___'}}</span>。
+                        {{info.petName?info.petName:'宝宝'}}<span class="input-join">{{info.soloDung?info.soloDung:'___'}}</span>学习自己上厕所。
+                    </div>
+<!--                    其它记录-->
+                    <div style="left: 194px; top: 990px;color: #595757; font-size: 18px; position:absolute; font-weight: 500;">
+                        其他记录
+                    </div>
+                    <div style="left: 149px; top: 1034px;color: #595757; font-size: 16px; position:absolute; font-weight: 400; width: 436px;">
+                        {{info.petName?info.petName:'宝宝'}}<span class="input-join">{{info.mainOther}}</span>
+                    </div>
+<!--                    照片1-->
+                    <img :src="info.imgs[0]" alt="" style="width: 114px; height: 114px; border-radius: 57px; left: 528px; top: 1095px; position:absolute; background-color: #eee;">
+                    <img src="/img/report/p1_heart.png" style="width: 44px; height: 40px; left: 620px; top: 1107px; position:absolute;" alt="">
+                    <!--                    照片2-->
+                    <img :src="info.imgs[1]" alt="" style="width: 126px; height: 126px; border-radius: 63px; left: 91px; top: 1211px; position:absolute; background-color: #eee;">
+<!--                    生活自理-->
+                    <div style="font-size: 30px; position:absolute; left: 229px; top: 1211px; color: #8fc31f;font-weight: 600">生活自理</div>
+                    <div style="left: 229px; top: 1273px;color: #595757; font-size: 16px; position:absolute; font-weight: normal; width: 360px; line-height: 26px;">
+                        <span class="input-join">{{info.takeCareInput?info.takeCareInput:'___'}}</span>
+                        {{info.petName?info.petName:'宝宝'}}{{info.takeCareStatic1}}{{info.takeCareStatic2}}
+                        <span class="input-join">{{info.takeCareSelect?info.takeCareSelect:'___'}}</span>
+                    </div>
+<!--                    照片3-->
+                    <img :src="info.imgs[2]" alt="" style="width: 136px; height: 136px; border-radius: 68px; left: 561px; top: 1460px; position:absolute; background-color: #eee;">
+<!--                    音乐艺术-->
+                    <div style="font-size: 30px; position:absolute; left: 214px; top: 1468px; color: #8fc31f;font-weight: 600">音乐艺术</div>
+                    <div style="left: 214px; top: 1516px;color: #595757; font-size: 16px; position:absolute; font-weight: normal; width: 312px; line-height: 26px;">
+                        {{info.petName?info.petName:'宝宝'}}本学期学习了<span class="input-join">{{info.musicLearn?info.musicLearn:'___'}}</span>等儿歌，
+                        也学习各种音乐乐器，例如：<span class="input-join">{{info.musicExample?info.musicExample:'___'}}</span>等。
+                        {{info.petName?info.petName:'宝宝'}}
+                        {{info.musicOther?info.musicOther:'___'}}。
+                    </div>
+<!--                    照片4-->
+                    <img :src="info.imgs[3]" alt="" style="width: 136px; height: 136px; border-radius: 68px; left: 583px; top: 1632px; position:absolute; background-color: #eee;">
+<!--                    照片5-->
+                    <img :src="info.imgs[4]" alt="" style="width: 134px; height: 134px; border-radius: 68px; left: 74px; top: 1720px; position:absolute; background-color: #eee;">
+<!--                    大小肌肉运动-->
+                    <div style="font-size: 30px; position:absolute; left: 163px; top: 1874px; color: #8fc31f;font-weight: 600">大小肌肉运动</div>
+                    <div style="left: 159px; top: 1923px;color: #595757; font-size: 16px; position:absolute; font-weight: normal; width: 400px; line-height: 26px;">
+                        {{info.petName?info.petName:'宝宝'}}本月学习了<span class="input-join">{{info.sportLearn0?info.sportLearn0:'___'}}</span>等大肌肉练习，
+                        也学习了<span class="input-join">{{info.sportLearn1?info.sportLearn1:'___'}}</span>等小肌肉练习。
+                        {{info.petName?info.petName:'宝宝'}}在大小肌肉方面发展<span class="input-join">{{info.sportDev?info.sportDev:'___'}}</span>。
+                    </div>
+<!--                    照片6-->
+                    <img :src="info.imgs[5]" alt="" style="width: 109px; height: 109px; border-radius: 55px; left: 61px; top: 2017px; position:absolute; background-color: #eee;">
+<!--                    照片7-->
+                    <img :src="info.imgs[6]" alt="" style="width: 84px; height: 84px; border-radius: 42px; left: 167px; top: 2127px; position:absolute; background-color: #eee;">
+<!--                    语言发展-->
+                    <div style="font-size: 30px; position:absolute; left: 267px; top: 2067px; color: #8fc31f;font-weight: 600">语言发展</div>
+                    <div style="width: 305px; position: absolute; left: 269px; top: 2118px; color: #595757; font-size: 16px">
+                        <div>{{info.languageA?info.languageA:'___'}}</div>
+                        <div>{{info.petName?info.petName:'宝宝'}}在语言方面的发展，{{info.languageB?info.languageB:'___'}}。</div>
+                    </div>
+<!--                    老师寄语-->
+                    <div style="font-size: 30px; position:absolute; left: 133px; top: 2306px; color: #8fc31f;font-weight: 600">老师寄语</div>
+                    <div style="width: 498px; position: absolute; left: 130px; top: 2350px; color: #595757; font-size: 16px">{{info.teacherSays}}</div>
+                </div>
+                <div class="inputer fs-12">
+                        <div class="inputer-content">
+                            <div class="d-flex base-info">
+                                <select class="sel-name student-name d-flex" v-model="info.name">
+                                    <option value="" selected="selected">请选择学生</option>
+                                    <option v-for="s in students">{{s}}</option>
+                                </select>
+                                <input class="sel-month month" type="text" placeholder="请输入月份" v-model="info.month">
+                            </div>
+                            <div class="d-flex justify-content-between fs-09 cl-333">
+                                <span>
+                                    <div>宝宝小名</div>
+                                    <input class="fs-12" type="text" v-model="info.petName" style="width: 8rem; margin-right: 0.55rem;">
+                                </span>
+                                <span>
+                                    <div>今日身高</div>
+                                    <input class="fs-12" type="text" v-model="info.height" style="width: 5rem; margin-right: 0.55rem">cm
+                                </span>
+                                <span>
+                                    <div>今日体重</div>
+                                    <input class="fs-12" type="text" v-model="info.weight" style="width: 5rem; margin-right: 0.55rem;">kg
+                                </span>
+                            </div>
+                            <div class="fs-15 main-food" style="margin-top: 2.6rem; margin-bottom: 1.55rem;">日常生活记录</div>
+                            <div class="cl-333 fs-09" style="margin-bottom: 0.95rem">日托时间内饮食</div>
+                            <div class="cell main-food">
+                                <span>每天正餐 1 次，每次以</span>
+                                <span class="radio-container">
+                                    <input hidden type="radio" id="main-food-milk" value="配方奶" v-model="info.mainFood">
+                                    <label for="main-food-milk">配方奶</label>
+                                </span>
+                                <span class="radio-container">
+                                    <input hidden type="radio" id="main-food-rice" value="营养饭菜" v-model="info.mainFood">
+                                    <label for="main-food-rice">营养饭菜</label>
+                                </span>
+                                <span>为主，</span>
+                            </div>
+                            <div class="cell">
+                                <span>每次</span>
+                                <span class="pink-left">奶量</span>
+                                <span><input type="text" style="width: 5rem" v-model="info.milkCount"></span>
+                                <span class="pink-right">CC</span>
+                                <span>，另外添加副食品，</span>
+                            </div>
+                            <div class="cell">
+                                <span>宝宝</span>
+                                <span class="pink-left">喜欢吃</span>
+                                <input type="text" style="width: 12rem" v-model="info.loveFood">
+                                <span>等食物，</span>
+                            </div>
+                            <div class="cell">
+                                <span>宝宝</span>
+                                <span class="radio-container">
+                                    <input hidden type="radio" id="can-use-spoon" value="会" v-model="info.canUseSpoon">
+                                    <label for="can-use-spoon">会</label>
+                                </span>
+                                <span class="radio-container">
+                                    <input hidden type="radio" id="cant-use-spoon" value="不会" v-model="info.canUseSpoon">
+                                    <label for="cant-use-spoon">不会</label>
+                                </span>
+                                <span>自己拿勺吃饭，</span>
+                            </div>
+                            <div class="cell">
+                                <span>吃饭习惯</span>
+                                <span class="radio-container">
+                                    <input type="radio" hidden id="eat-habit-normal" value="也不错" v-model="info.eatHabit">
+                                    <label for="eat-habit-normal">也不错</label>
+                                </span>
+                                <span class="radio-container">
+                                    <input type="radio" hidden id="eat-habit-great" value="很好" v-model="info.eatHabit">
+                                    <label for="eat-habit-great">很好</label>
+                                </span>
+                                <span class="radio-container">
+                                    <input type="radio" hidden id="eat-habit-bad" value="不好" v-model="info.eatHabit">
+                                    <label for="eat-habit-bad">不好</label>
+                                </span>
+                            </div>
+                            <div class="cell">每天吃点心2次，每次宝宝都能吃完。</div>
+                            <div style="margin-top: 1.5rem;" class="fs-09 cl-333 cell">睡眠</div>
+                            <div class="cell">宝宝白天在小熊馆睡 1 次 ， </div>
+                            <div class="cell sel-sleep">
+                                <span>每次睡眠时间</span>
+                                <span class="pink-left">平均为</span>
+                                <span><input type="text" style="width: 5rem;" v-model="info.sleepTime"></span>
+                                <span class="pink-right">分钟</span>
+                            </div>
+                            <div class="d-flex cell">
+                                <div>宝宝在小熊馆</div>
+                                <div class="d-flex">
+                                    <div>
+                                        <div class="radio-container">
+                                            <input type="radio" hidden v-model="info.sleepStatus" value="容易入睡睡得安稳" id="sleep-status-0">
+                                            <label for="sleep-status-0">容易入睡睡得安稳</label>
+                                        </div>
+                                        <div class="radio-container">
+                                            <input type="radio" hidden v-model="info.sleepStatus" value="需要老师陪同入睡" id="sleep-status-1">
+                                            <label for="sleep-status-1">需要老师陪同入睡</label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="radio-container">
+                                            <input type="radio" hidden v-model="info.sleepStatus" value="容易惊醒" id="sleep-status-2">
+                                            <label for="sleep-status-2">容易惊醒</label>
+                                        </div>
+                                        <div class="radio-container">
+                                            <input type="radio" hidden v-model="info.sleepStatus" value="需要特殊照顾" id="sleep-status-3">
+                                            <label for="sleep-status-3">需要特殊照顾</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="small-title cell sel-wc">如厕记录</div>
+                            <div class="cell">
+                                <span>宝宝白天一共</span>
+                                <span class="pink-left">换</span>
+                                <span><input type="text" style="width: 5rem" v-model="info.urineCount"></span>
+                                <span class="pink-right">次</span>
+                                <span>尿不湿，</span>
+                            </div>
+                            <div class="cell">
+                                <span>便便</span>
+                                <span class="radio-container">
+                                    <input type="radio" hidden value="正常" v-model="info.dungStatus" id="dung-status-0">
+                                    <label for="dung-status-0">正常</label>
+                                </span>
+                                <span class="radio-container">
+                                    <input type="radio" hidden value="不正常" v-model="info.dungStatus" id="dung-status-1">
+                                    <label for="dung-status-1">不正常</label>
+                                </span>
+                            </div>
+                            <div class="cell">
+                                <span>宝宝</span>
+                                <span class="radio-container">
+                                    <input type="radio" hidden value="还没开始" v-model="info.soloDung" id="solo-dung-0">
+                                    <label for="solo-dung-0">还没开始</label>
+                                </span>
+                                <span class="radio-container">
+                                    <input type="radio" hidden value="已经开始" v-model="info.soloDung" id="solo-dung-1">
+                                    <label for="solo-dung-1">已经开始</label>
+                                </span>
+                                <span>学习自己上厕所</span>
+                            </div>
+                            <div class="small-title cell sel-other">其它记录</div>
+                            <div class="d-flex">
+                                <span>宝宝</span>
+                                <div>
+                                    <div class="radio-container">
+                                        <input type="radio" hidden value="喜欢擦香香" name="main-other" v-model="info.mainOther" id="main-other-0">
+                                        <label for="main-other-0">喜欢擦香香</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" hidden value="学会了洗手" name="main-other" v-model="info.mainOther" id="main-other-1">
+                                        <label for="main-other-1">学会了洗手</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" hidden value="的饭量比其他宝宝大" name="main-other" v-model="info.mainOther" id="main-other-2">
+                                        <label for="main-other-2">的饭量比其他宝宝大</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" hidden value="肠胃比较弱，需要特别照护" name="main-other" v-model="info.mainOther" id="main-other-3">
+                                        <label for="main-other-3">肠胃比较弱，需要特别照护</label>
+                                    </div>
+                                    <div class="radio-container d-flex align-items-start" style="margin-top: .5rem;">
+                                        <input type="radio" hidden id="mainOther4" name="main-other">
+                                        <label for="mainOther4" ref="mainOther4">
+                                            <textarea placeholder="请用一句话描述，20字以内" style="background-color: #F5F5F5; width: 24.65rem; height: 4.4rem; padding-left: .5rem;" @input="mainOther4Inputing" @click.stop="mainOther4InputClick" ></textarea>
+                                        </label>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="big-title sel-tcs cell d-flex align-items-center justify-content-between">
+                                <div>生活自理</div>
+                                <div class="char-count">{{info.takeCareInput.length}}/50</div>
+                            </div>
+                            <div class="cell">
+                                <textarea @input="takeCareInputing" placeholder="字数在40～50之间，不得少于40多余50。" style="width: 29.5rem; height: 7rem;" v-model="info.takeCareInput"></textarea>
+                            </div>
+                            <div class="cell fs-12 text-black">宝宝{{info.takeCareStatic1}}</div>
+                            <div class="cell fs-12 text-black">{{info.takeCareStatic2}}</div>
+                            <div class="radio-container cell">
+                                <input type="radio" hidden value="超过同月龄宝宝" id="take-care-self-0" v-model="info.takeCareSelect">
+                                <label for="take-care-self-0" class="cl-666">超过同月龄宝宝</label>
+                            </div>
+                            <div class="radio-container cell">
+                                <input type="radio" hidden value="达到了该月龄宝宝的能力指标" id="take-care-self-1" v-model="info.takeCareSelect">
+                                <label for="take-care-self-1" class="cl-666">达到了该月龄宝宝的能力指标</label>
+                            </div>
+                            <div class="radio-container cell">
+                                <input type="radio" hidden value="需要多鼓励，多练习，不久就会有进步的" id="take-care-self-2" v-model="info.takeCareSelect">
+                                <label for="take-care-self-2" class="cl-666">需要多鼓励，多练习，不久就会有进步的</label>
+                            </div>
+                            <div class="big-title cell sel-music">音乐艺术</div>
+                            <div class="cell">
+                                <span>宝宝本月</span>
+                                <span class="pink-left">学习了</span>
+                                <span><input style="width: 16rem;" type="text" v-model="info.musicLearn"></span>
+                            </div>
+                            <div class="cell">等儿歌，也学习各种音乐乐器，</div>
+                            <div class="cell">
+                                <span class="pink-right">例如: </span>
+                                <input style="width: 20rem;" type="text" v-model="info.musicExample">
+                                <span>等。</span>
+                            </div>
+                            <div class="d-flex">
+                                <div>宝宝</div>
+                                <div>
+                                    <div class="radio-container">
+                                        <input type="radio" hidden name="music-other" value="喜欢音乐课，每次都能积极参加" id="music-other-0" v-model="info.musicOther">
+                                        <label for="music-other-0">喜欢音乐课，每次都能积极参加</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" hidden name="music-other" value="喜欢律动，每次音乐响起都跟着音乐舞动身体" id="music-other-1" v-model="info.musicOther">
+                                        <label for="music-other-1">喜欢律动，每次音乐响起都跟着音乐舞动身体</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" hidden name="music-other" value="喜欢舞蹈，日常生活都会手舞足蹈" id="music-other-2" v-model="info.musicOther">
+                                        <label for="music-other-2">喜欢舞蹈，日常生活都会手舞足蹈</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" hidden id="music-other-3" name="music-other">
+                                        <label for="music-other-3" ref="musicOther3">
+                                            <textarea placeholder="请用一句话描述，20字以内" class="fs-12" style="width: 22rem; height: 4.4rem;margin-top: .5rem;" @click.stop="musicOtherAction" @input="musicOtherInputing"></textarea>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="big-title cell sel-sport">大小肌肉</div>
+                            <div class="cell">
+                                <span>宝宝本月</span>
+                                <span class="pink-left">学习了</span>
+                                <span><input style="width: 17rem;" type="text" v-model="info.sportLearn0"></span>
+                            </div>
+                            <div class="cell">
+                                <span>等大肌肉练习，也</span>
+                                <span class="pink-left">学习了</span>
+                            </div>
+                            <div class="cell">
+                                <span><input style="width: 20rem;" type="text" v-model="info.sportLearn1"></span>
+                                <span>等小肌肉练习。</span>
+                            </div>
+                            <div class="cell">宝宝在大小肌肉方面发展</div>
+                            <div class="cell radio-container">
+                                <input type="radio" hidden id="sport-dev-0" value="超过同月龄宝宝" v-model="info.sportDev">
+                                <label for="sport-dev-0">超过同月龄宝宝</label>
+                            </div>
+                            <div class="cell radio-container">
+                                <input type="radio" hidden id="sport-dev-1" value="达到了该月龄宝宝的能力指标" v-model="info.sportDev">
+                                <label for="sport-dev-1">达到了该月龄宝宝的能力指标</label>
+                            </div>
+                            <div class="cell radio-container">
+                                <input type="radio" hidden id="sport-dev-2" value="还需要加强锻炼，在步行稳定方面需要练习" v-model="info.sportDev">
+                                <label for="sport-dev-2">还需要加强锻炼，在步行稳定方面需要练习</label>
+                            </div>
+                            <div class="big-title cell d-flex justify-content-between align-items-center">
+                                <div>语言发展</div>
+                                <div class="char-count">{{info.languageA.length}}/50</div>
+                            </div>
+                            <div class="cell">
+                                <textarea @input="languageAInputing" style="width: 29.5rem; height: 7rem;" placeholder="字数在40～50之间，不得少于40多余50。" v-model="info.languageA"></textarea>
+                            </div>
+                            <div class="cell sel-lan">宝宝在语言方面的发展</div>
+                            <div class="radio-container cell">
+                                <input type="radio" hidden id="language-def-0" value="超过同月龄宝宝" v-model="info.languageB">
+                                <label for="language-def-0">超过同月龄宝宝</label>
+                            </div>
+                            <div class="radio-container cell">
+                                <input type="radio" hidden id="language-def-1" value="达到了该月龄宝宝的能力指标" v-model="info.languageB">
+                                <label for="language-def-1">达到了该月龄宝宝的能力指标</label>
+                            </div>
+                            <div class="radio-container cell">
+                                <input type="radio" hidden id="language-def-2" value="需要多鼓励，多练习，不久就会有进步的" v-model="info.languageB">
+                                <label for="language-def-2">需要多鼓励，多练习，不久就会有进步的</label>
+                            </div>
+                            <div class="big-title sel-ts cell d-flex align-items-center justify-content-between">
+                                <div>老师寄语</div>
+                                <div class="char-count">{{info.teacherSays.length}}/150</div>
+                            </div>
+                            <div>
+                                <textarea @input="teacherSayInputing" style="width: 29.5rem; height: 7.7rem;" placeholder="相对宝宝说的话，150字以内" v-model="info.teacherSays"></textarea>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div v-for="(s, idx) in 4">
+                                    <div>
+                                        <div class="photo-back" style="background-size: 100% 100%; background-repeat: no-repeat">
+                                            <img v-if="(info.imgs[idx]).length>0" :src="info.imgs[idx]" alt="" style="width: 100%; height: 100%;">
+                                            <div v-else>照片{{idx+1}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-around">
+                                        <div class="pointer sel">选择</div>
+                                        <div class="pointer upl" @click.stop="selImg" :data-idx="idx">上传</div>
+                                    </div>
+                                    <input type="file" :data-idx="idx" hidden ref="upload" @change="imgSelected">
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div v-for="(s, idx) in 3" class="margin-right">
+                                    <div>
+                                        <div class="photo-back" style="background-size: 100% 100%; background-repeat: no-repeat">
+                                            <img v-if="(info.imgs[idx+4]).length>0" :src="info.imgs[idx+4]" alt="" style="width: 100%; height: 100%;">
+                                            <div v-else>照片{{idx+5}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-around">
+                                        <div class="pointer sel">选择</div>
+                                        <div class="pointer upl" @click.stop="selImg" :data-idx="idx+4">上传</div>
+                                    </div>
+                                    <input type="file" :data-idx="idx+4" hidden ref="upload" @change="imgSelected">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-center">
+                            <div class="send-btn active" @click.stop="submit">推送至家长小程序</div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/v/v-cv.js"></script>
+<script src="/j/t/report.js"></script>
+</html>

@@ -1,0 +1,84 @@
+@import "common/common.css";
+
+.content {
+
+}
+.index-bg {
+    background-image: url("/img/login/bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+}
+.logo {
+    width: 350px;
+    height: 65px;
+    margin-left: 53px;
+    margin-top: 30px;
+}
+
+.form-content {
+    margin-left: 20%;
+    margin-top: 10%;
+}
+
+.welcome {
+    width: 362px;
+    height: 580px;
+    z-index: 2;
+}
+.input-content {
+    margin-left: -120px;
+    padding-left: 190px;
+    background-color: white;
+    border-radius: 14px;
+    width: 600px;
+    height: 541px;
+}
+.input-content>.title {
+    margin-bottom: 63px;
+    font-size: 30px;
+}
+.input-cell {
+    width: 340px;
+    height: 68px;
+    border-radius: 34px;
+    padding: 0 39px;
+    background-color: #F2F9FF;
+}
+input.act,
+input.pwd {
+    font-size: 24px;
+    background-color: rgba(0,0,0,0);
+    width: 205px;
+    border: none;
+    margin-left: 31px;
+}
+.account {
+    margin-bottom: 30px;
+}
+input[name="role"] {
+    width: 20px;
+    height: 20px;
+    display: none;
+}
+input[name="role"] + label {
+    background: url("/img/login/dradio.png") no-repeat left / 20px 20px;
+    padding: 10px 0 10px 40px;
+    font-size: 18px;
+}
+input:checked[name="role"]+label {
+    background: url("/img/login/sradio.png") no-repeat left / 20px 20px;
+}
+.user-type {
+    width: 340px;
+    padding: 0 17px;
+}
+.login {
+    width:240px;
+    height:68px;
+    background:rgba(25,70,95,1);
+    box-shadow:0 6px 26px 2px rgba(25,70,95,0.5);
+    border-radius:34px;
+    color: #fff;
+    margin-left: 50px;
+}

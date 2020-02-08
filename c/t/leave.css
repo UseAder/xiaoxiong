@@ -1,0 +1,26 @@
+@import "/c/common/common.css";
+
+.content {
+    padding: 3rem !important;
+}
+
+.table {
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.reason {
+    max-width: 33%;
+    width: 33%;
+}
+
+.pass-btn {
+    background-color: #FF95AA;
+    width: 5rem;
+    height: 2.1rem;
+    border-radius: 1.05rem;
+}
+
+.applier-role {
+    color: #00C4BA;
+}

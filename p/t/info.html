@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+
+    <script src="/v/cj.js"></script>
+
+    <link rel="stylesheet" href="/c/t/info.css">
+</head>
+<body>
+<div id="app" class="container-fluid full-height d-flex flex-column">
+    <navigator nickname="二大爷"></navigator>
+    <div class="d-content full-height d-flex">
+        <div class="content">
+            <div class="info">
+                <div class="d-flex">
+                    <div class="avatar"><img src="/img/index/head_men.png" style="width: 6.6rem; height: 7.9rem;" alt>
+                    </div>
+                    <div class="hi d-flex flex-column justify-content-end">
+                        <div class="welcome">Hi, 再叨叨老师</div>
+                        <div class="d-flex align-items-center">
+                            <div class="account">账号：0000001</div>
+                            <div class="change-pwd pointer" @click.stop="changePwd">修改密码</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="base">
+                    <div class="base-title d-flex align-items-baseline">
+                        <div class="fs-14">基本信息</div>
+                        <div class="fs-09 change-info pointer" @click.stop="changeInfo">修改</div>
+                    </div>
+                    <div class="base-cell cl-333 fs-10">姓名：${options.name}</div>
+                    <div class="base-cell cl-333 fs-10">班级：</div>
+                    <div class="base-cell cl-333 fs-10">性别：</div>
+                    <div class="base-cell cl-333 fs-10">年龄：</div>
+                    <div class="base-cell cl-333 fs-10">电话：</div>
+                    <div class="base-cell cl-333 fs-10">住址：</div>
+                    <div class="base-cell cl-333 fs-10">毕业：</div>
+                </div>
+            </div>
+            <div v-if="showChangePwd" class="alert">
+                <div class="alert-content align-items-end">
+                    <div class="alert-close" @click.stop="submitPwd"><img src="/img/alert/close.png" style="width: 1.5rem; height: 1.5rem;" alt>
+                    </div>
+                    <div class="row "><label>原密码：</label><input type="password" class="title-input-input"></div>
+                    <div class="row "><label>新密码：</label><input type="password" class="title-input-input"></div>
+                    <div class="row "><label>确认新密码：</label><input type="password" class="title-input-input"></div>
+                    <div class="submit pointer" @click.stop="submitPwd">确定</div>
+                </div>
+            </div>
+            <div v-if="showChangeInfo" class="alert">
+                <div class="alert-content">
+                    <div class="alert-close" @click.stop="closeInfo"><img src="/img/alert/close.png" style="width: 1.5rem; height: 1.5rem;" alt>
+                    </div>
+                    <div class="row">
+                        <div><label class="title-input-title">账号：<input class="title-input-input"
+                                                                        value="${options.account}"></label></div>
+                        <div class="right"><label class="title-input-title">姓名：<input class="title-input-input"
+                                                                                      value="${options.name}"></label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div><label class="title-input-title">班级：</label><input class="title-input-input fs-12" disabled
+                                                                                value="${options.class}"></div>
+                        <div class="right d-flex align-items-center justify-content-between"><label
+                                class="title-input-title">性别：</label>
+                            <div class="radio-container d-flex align-items-center justify-content-around"><input
+                                    type="radio" name="gender" id="male"><label
+                                    for="male">男</label><input type="radio"
+                                                               name="gender" id="female"><label for="female">女</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div><label class="title-input-title">年龄：<input class="title-input-input"
+                                                                        value="${options.age}"></label></div>
+                        <div class="right"><label class="title-input-title">电话：<input class="title-input-input"
+                                                                                      value="${options.phone}"></label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="d-flex align-items-start"><label class="title-input-title">住址：</label><textarea
+                                class="title-input-input" rows="1">${options.address}</textarea></div>
+                        <div class="right d-flex align-items-start"><label
+                                class="title-input-title">毕业：</label><textarea class="title-input-input">${options.graduate}</textarea>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center">
+                        <div class="submit pointer" @click.stop="submitInfo">完成</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/v/v-cv.js"></script>
+<script src="/j/t/info.js"></script>
+</html>

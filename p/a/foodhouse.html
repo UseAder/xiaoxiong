@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+
+    <script src="/v/cj.js"></script>
+
+    <link rel="stylesheet" href="/c/a/foodhouse.css">
+</head>
+<body>
+<div id="app" class="container-fluid full-height d-flex flex-column">
+    <navigator nickname="二大爷"></navigator>
+    <div class="d-content full-height d-flex">
+        <sidebar></sidebar>
+        <div class="content">
+            <div class="func-area d-flex justify-content-between">
+                <div class="breadcrumb fs-09"><a href="/p/a/food.html">餐点管理</a>>食品库</div>
+                <div class="new-cell" @click.stop="get_food_info(0);">新建</div>
+            </div>
+            <div class="collection d-flex flex-wrap full-height overflow-auto">
+                <div class="cell pointer" v-for="l in list" @click.stop="editAlert.choosedImg='';get_food_info(l.food_id);">
+                    <img :src="l.food_img" style="width: 11.25rem;height: 11.25rem;">
+                    <div class="name text-center">{{l.food_name}}</div>
+                </div>
+            </div>
+            <alert v-if="editAlert.show" @submit="editSubmit" @cancel="deleteAlert.show=true;" @close="editAlertClose" canceltext="删除" canceltextColor="#fff" cancelbackgroundcolor="#FF88A4" cancelbordercolor="#FF88A4">
+                <div>
+                    <label class="title-input-title">名称：</label>
+                    <input class="title-input-input" placeholder="请输入餐点名称" v-model="editAlert.info.food_name">
+                </div>
+                <div class="photo-row d-flex">
+                    <label class="title-input-title">照片：</label>
+                    <div>
+                        <div class="text-right fs-09 cl-999">500x500px,2MB以内</div>
+                        <img v-if="editAlert.info && editAlert.info.food_img.length==0 && !editAlert.choosedImg" src="/img/foodhouse/addimg.png" class="pointer" style="width: 15rem; height: 15rem" alt="" @click.stop="previewClicked">
+                        <img v-else :src="editAlert.choosedImg?editAlert.choosedImg:editAlert.info.food_img" class="pointer" style="width: 15rem; height: 15rem;" @click="previewClicked">
+                    </div>
+                    <input hidden type="file" ref="selectImg" @change="selectedImg">
+                </div>
+            </alert>
+            <delete-alert v-if="deleteAlert.show" title="你确定要删除该食物吗" content="删除后不可找回,请谨慎操作" @submit="delete_food" @close="deleteAlert.show=false;">
+
+            </delete-alert>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="/v/v-cv.js"></script>
+<script type="module" src="/j/a/foodhouse.js"></script>
+</html>

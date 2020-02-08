@@ -1,0 +1,54 @@
+@import "../common/common.css";
+
+
+td {
+    padding: 1.45rem 1.5rem;
+    font-size: 0.9rem;
+    min-width: 9rem;
+}
+
+td.number {
+    min-width: 0;
+}
+
+td.avatar {
+    padding: 0.45rem 0.5rem;
+}
+
+.alert .guardian-input-bg {
+    background-color: #F2F6F7;
+    padding: 0 1rem;
+    width: 15rem;
+    height: 2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.alert .guardian-input {
+    margin-left: 0.55rem;
+    background-color: rgba(0,0,0,0);
+}
+.alert .guardian-search-btn {
+    margin-left: 1.5rem;
+    width: 6rem;
+    height: 2.4rem;
+    background-color: #90D1E4;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    border-radius: 1.2rem;
+}
+
+.alert .add-btn {
+    background-color: #90D1E4;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    width: 4rem;
+    height: 1.9rem;
+    border-radius: 0.4rem;
+}

@@ -1,0 +1,31 @@
+@import "../common/common.css";
+.table-back {
+    border-radius: 1rem;
+    overflow: scroll;
+    margin-top: 2rem;
+}
+td.number {
+    padding: 1rem 1.15rem;
+}
+td.issue {
+    padding: 1rem 1.55rem;
+}
+td.content {
+    padding: 1rem 1.85rem;
+}
+td.photos {
+    padding: 1rem 1.7rem;
+}
+td.photos img {
+    margin-right: 1rem;
+}
+
+.alert .edit-slot {
+    margin-top: 1.9rem;
+}
+.alert .edit-slot textarea {
+    width: 15rem;
+    height: 11.55rem;
+    padding: 0.5rem 1rem;
+    background-color: #f5f5f5;
+}

@@ -1,0 +1,30 @@
+@import "common/common.css";
+
+td.account,
+td.name,
+td.phone,
+td.status {
+    min-width: 15.35rem;
+    height: 5rem;
+    text-align: center !important;
+}
+
+td.number {
+    min-width: 50px;
+    height: 56px;
+}
+td.status>div>div {
+    width: 6rem;
+    height: 2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 !important;
+    border-radius: 0.2rem;
+}
+td.status .using {
+    background-color: #09BB07;
+}
+td.status .pausing {
+    background-color: #FFBE00;
+}

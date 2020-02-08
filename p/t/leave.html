@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+
+    <script src="/v/cj.js"></script>
+
+    <link rel="stylesheet" href="/c/t/leave.css">
+</head>
+<body>
+<div id="app" class="container-fluid full-height d-flex flex-column">
+    <navigator nickname="二大爷"></navigator>
+    <div class="d-content full-height d-flex">
+        <div class="content">
+            <div class="table overflow-auto">
+                <table>
+                    <tr><th v-for="th in ths">{{th}}</th></tr>
+                    <tr v-for="(row,idx) in rows" :class="idx%2==0?'white':'blue'">
+                        <td class="border-right">{{row.number}}</td>
+                        <td class="border-right">
+                            <img :src="row.avatar" style="width: 4rem; height: 4rem; border-radius: 50%;">
+                        </td>
+                        <td class="border-right cl-333">{{row.name}}</td>
+                        <td class="reason border-right cl-333">{{row.reason}}</td>
+                        <td class="border-right cl-333">
+                            <div>{{row.guardian.name}}</div>
+                            <div>{{row.guardian.phone}}</div>
+                        </td>
+                        <td class="border-right">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <div style="margin-right: 0.5rem;"><img :src="row.applier.avatar" style="width: 3rem; height: 3rem; border-radius: 50%;"></div>
+                                <div>
+                                    <div class="cl-333">{{row.applier.name}}</div>
+                                    <div class="fw-600 applier-role">{{row.applier.role}}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center justify-content-center">
+                                <div class="pass-btn pointer text-white fs-10 d-flex align-items-center justify-content-center">{{row.passStatus}}</div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/v/v-cv.js"></script>
+<script src="/j/t/leave.js"></script>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>小熊幼幼后台管理系统</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.19.0/axios.js"></script>
+
+    <link href="/c/login.css" rel="stylesheet">
+
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+</head>
+<body>
+<div id="app" class="container-fluid index-bg full-height d-flex flex-column">
+    <div class="content full-v-screen">
+        <img src="/img/login/logo.png" class="logo" alt="logo">
+        <div class="form full-width d-flex align-items-center justify-content-center">
+            <div class="form-content d-flex align-items-center">
+                <img src="/img/login/welcome.png" alt="welcome" class="welcome">
+                <div class="input-content d-flex flex-column justify-content-center">
+                    <div class="title fs-17">小熊幼幼后台管理系统</div>
+                    <div class="account input-cell d-flex align-items-center">
+                        <img src="/img/login/account.png" alt="" style="width: 32px; height: 36px">
+                        <input class="act" required placeholder="请输入账号" type="text" name="account" v-model="account">
+                    </div>
+                    <div class="password input-cell d-flex align-items-center">
+                        <img src="/img/login/password.png" alt="" style="width: 1.88rem; height: 2.12rem;">
+                        <input class="pwd" placeholder="请输入密码" type="password" name="password" v-model="pwd">
+                    </div>
+                    <div class="user-type d-flex align-items-center justify-content-between">
+                        <input id="admin" type="radio" value="1" name="role" v-model="type" @click.stop="account='admin';"><label for="admin"
+                                                                                  class="d-flex align-items-center">管理员</label>
+                        <input id="master" type="radio" value="3" name="role" v-model="type" @click.stop="account='master';"><label for="master" class="d-flex align-items-center">园长</label>
+                        <input id="staff" type="radio" value="2" name="role" v-model="type" @click.stop="account='teacher';"><label for="staff"
+                                                                          class=" d-flex align-items-center">教职工</label>
+                    </div>
+                    <a href="javascript:"><div @click.stop="login" id="submit" class="login fs17 d-flex align-items-center justify-content-center">登录</div></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../v/cv.js"></script>
+<script type="module" src="/j/login.js"></script>
+</body>
+</html>

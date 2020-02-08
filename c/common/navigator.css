@@ -1,0 +1,25 @@
+.navigator-back {
+    background-color: #EFEADD;
+    width: 100vw;
+    height: 5rem;
+    padding: 0 43px;
+    box-shadow:0 8px 20px 0 rgba(242,246,247,0.5);
+    position: fixed;
+}
+.navigator-back .exit-btn {
+    width: 4.5rem;
+    height: 2rem;
+    border:2px solid rgba(25,70,95,1);
+    border-radius:1rem;
+    color: #19465F;
+    font-size: 1rem;
+}
+.navigator-back .nickname {
+    padding: 0 0.85rem;
+}
+.time>.time-content {
+    font-size: 0.95rem;
+}
+.nickname {
+    font-size: 1.2rem;
+}

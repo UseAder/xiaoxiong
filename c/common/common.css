@@ -1,0 +1,286 @@
+@import "navigator.css";
+@import "sidebar.css";
+@import "alert.css";
+
+html,
+body,
+.container,
+.container-fluid {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    background-color: #F2F6F7;
+}
+
+a {
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.alert input[type="radio"] {
+    display: none;
+}
+
+.alert input[type="radio"] + label {
+    background: url("/img/teacher/dradio.png") no-repeat left / 20px 20px;
+    padding: 10px 0 10px 40px;
+    font-size: 18px;
+}
+
+.alert input:checked[type="radio"] + label {
+    background: url("/img/teacher/sradio.png") no-repeat left / 20px 20px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.d-content {
+    padding-top: 5rem;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.full-h-screen {
+    width: 100vw;
+}
+
+.full-v-screen {
+    height: 100vh;
+}
+
+.fs-07 {
+    font-size: 0.7rem;
+}
+
+.fs-08 {
+    font-size: 0.8rem;
+}
+
+.fs-09 {
+    font-size: 0.9rem;
+}
+
+.fs-10 {
+    font-size: 1rem;
+}
+
+.fs-11 {
+    font-size: 1.1rem;
+}
+
+.fs-12 {
+    font-size: 1.2rem;
+}
+
+.fs-14 {
+    font-size: 1.4rem;
+}
+
+.fs-15 {
+    font-size: 1.5rem;
+}
+
+.fs-18 {
+    font-size: 1.8rem;
+}
+
+.fw-400 {
+    font-weight: 400;
+}
+
+.fw-500 {
+    font-weight: 500;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+.cl-999 {
+    color: #999;
+}
+
+.cl-333 {
+    color: #333;
+}
+
+.cl-666 {
+    color: #666;
+}
+
+input,
+select,
+textarea {
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    border: none;
+}
+
+textarea {
+    resize: none;
+}
+
+.page-item {
+    margin-right: 0.5rem;
+    border: none;
+    border-radius: 25rem;
+}
+
+.page-link:not([href]):not([tabindex]) {
+    border: none;
+    border-radius: 0.25rem;
+    color: #999;
+}
+
+.page-item.active > .page-link:not([href]):not([tabindex]) {
+    color: #fff;
+    background-color: #19465F;
+}
+
+.d-content > .content {
+    padding-left: 19rem;
+    padding-right: 0.85rem;
+    padding-bottom: 1rem;
+    /*margin-left: -18rem;*/
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.func-area {
+    padding: 3rem 0 1.5rem 0;
+    position: relative;
+}
+
+.func-area > .search > .search-bar {
+    background-color: white;
+    padding: 0.35rem 1rem;
+    box-shadow: 0 0.25rem 0.55rem 0 rgba(232, 236, 237, 0.5);
+    margin-right: 2rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+.func-area input {
+    height: 1.5rem;
+    width: 7rem;
+}
+
+.func-area .input-outer {
+    border-right: #E7F6F6 solid 0.05rem;
+    margin: 0 0.55rem;
+}
+
+.func-area .new-cell {
+    width: 6rem;
+    height: 2.5rem;
+    font-size: 1.3rem;
+    background: #90D1E4;
+    box-shadow: 0rem 1rem 2rem 0rem rgba(144, 209, 228, 0.5);;
+    border-radius: 1.25rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+table {
+    padding-top: 83px;
+    border: none;
+    min-width: 100%;
+}
+
+td, th {
+    text-align: center;
+}
+
+th {
+    color: #fff;
+    background-color: #90D1E4;
+    height: 3rem;
+    padding: 0 !important;
+    line-height: 3rem;
+    font-weight: 400;
+    border-right: #14374B solid 1px;
+    border-top: none;
+    font-size: 1.2rem;
+}
+
+td {
+    font-size: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    vertical-align: middle !important;
+    text-align: center;
+}
+
+td.border-right {
+    border-right: #14374B solid 1px !important;
+}
+
+tr.white {
+    background-color: white;
+}
+
+tr.blue {
+    background-color: #F2F9FF;
+}
+
+td.funcBtn {
+    min-width: 9.3rem;
+    padding: 0.85rem 2rem;
+}
+
+td.funcBtn > div > div {
+    padding: 10px;
+}
+
+td.funcBtn > div > div > img {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.pagination {
+    margin-top: 51px;
+}
+
+.alert .upload {
+    background-color: #90D1E4;
+    color: white;
+    width: 4rem;
+    height: 1.9rem;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 0.2rem;
+    margin-left: 5px;
+}
+
+.alert #upload-result {
+    width: 5.8rem;
+    height: 5.8rem;
+    border: 0.3px #999999 solid;
+}
+
+.bg-light-blue {
+    background-color: #90D1E4;
+}
+
+.breadcrumb {
+    background-color: rgba(0, 0, 0, 0);
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <script src="/v/cj.js"></script>
+    <link rel="stylesheet" href="/c/a/food.css">
+</head>
+<body>
+<div id="app" class="container-fluid full-height d-flex flex-column" @click="hideFoodList">
+    <navigator nickname="二大爷"></navigator>
+    <div class="d-content full-height d-flex">
+        <sidebar></sidebar>
+        <div class="content">
+            <div class="func-area d-flex justify-content-between align-items-center">
+                <div class="func-btns d-flex">
+                    <div class="func-btn"><img src="/img/food/previous.png"
+                                               style="width: 1.15rem; height: 1rem; margin-right: 0.45rem;">上一周
+                    </div>
+                    <div class="func-btn">本周</div>
+                    <div class="func-btn">下一周<img src="/img/food/next.png"
+                                                  style="width: 1.15rem; height: 1rem; margin-left: 0.45rem"></div>
+                    <div class="func-btn" @click="navigate" data-href="/p/a/foodhouse.html">食品库</div>
+                </div>
+                <div class="prompt fs-10 cl-333">
+                    <img src="/img/food/warning.png" style="width: 1.2rem; height: 1.2rem; margin-right: 1rem">
+                    今日餐食未选择
+                </div>
+            </div>
+            <div class="table">
+                <table>
+                    <tr>
+                        <th v-for="th in ths">{{th}}</th>
+                    </tr>
+                    <tr v-for="(r,idx) in rows" :class="idx%2==0?'white':'blue'">
+                        <td width="10%" class="border-right">{{r.time}}</td>
+                        <td width="45%" class="border-right">
+                            <div class="selected-box d-flex pointer flex-wrap" @click.stop="boxAction" :data-idx="idx"
+                                 data-type="launch">
+                                <div class="food-btn" v-for="(l,idx) in r.launch">{{l}}
+                                    <img class="pointer"
+                                         src="/img/food/delete.png"
+                                         style="width:0.7rem; height: 0.7rem;margin-left: 1rem;"
+                                         :data-idx="idx"
+                                         @click.stop="currentFoodClick">
+                                </div>
+                                <div class="arrow d-flex align-items-center justify-content-center">
+                                    <img src="/img/food/arrow.png" style="width: 0.9rem; height: 0.6rem;">
+                                </div>
+                            </div>
+                        </td>
+                        <td width="45%">
+                            <div class="selected-box d-flex pointer flex-wrap" @click.stop="boxAction" :data-idx="idx"
+                                 data-type="dessert">
+                                <div class="food-btn" v-for="d in r.dessert">{{d}}<img class="pointer"
+                                                                                       src="/img/food/delete.png"
+                                                                                       style="width:0.7rem; height: 0.7rem;margin-left: 1rem;">
+                                </div>
+                                <div class="arrow d-flex align-items-center justify-content-center">
+                                    <img src="/img/food/arrow.png" style="width: 0.9rem; height: 0.6rem;">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="food-list" v-if="foodListShow"
+                 :style="'left:'+flLeft+'px;width:'+flWidth+'px;top:'+(flTop+flHeight)+'px;'">
+                <div class="cell pointer cl-333 d-flex align-items-center justify-content-between"
+                     :class="item.active?'active':''" v-for="(item,idx) in total[currentType]" @click.stop="totalFoodClick" :data-idx="idx">
+                    <div>{{item.name}}</div>
+                    <img v-if="item.active" src="/img/food/selected.png" style="width: 1.35rem; height: 1rem">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/v/v-cv.js"></script>
+<script type="module" src="/j/a/food.js"></script>
+
+</html>

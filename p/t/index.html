@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+
+    <script src="/v/cj.js"></script>
+
+    <link rel="stylesheet" href="/c/t/index.css">
+</head>
+<body>
+<div id="app" class="container-fluid full-height d-flex flex-column">
+    <navigator nickname="二大爷"></navigator>
+    <div class="d-content full-height d-flex">
+        <div class="content">
+            <div class="func-area d-flex align-items-center ">
+                <div class="leave card" @click.stop="navigate" data-uri="/p/t/leave.html">
+                    <img src="/img/student/leave.png" style="width: 2.4rem; height: 2.7rem;">
+                    <div>请假(1)</div>
+                </div>
+                <div class="student card" @click.stop="navigate" data-uri="/p/t/student.html">
+                    <img src="/img/student/student.png" style="width: 3rem; height: 3rem;">
+                    <div>学生管理</div>
+                </div>
+                <div class="report card" @click.stop="navigate" data-uri="/p/t/report.html">
+                    <img src="/img/student/report.png" style="width: 3rem; height: 3rem">
+                    <div>成长报告</div>
+                </div>
+            </div>
+            <div class="table full-height overflow-auto">
+                <table>
+                    <tr>
+                        <th v-for="(th, idx) in ths" :class="idx===0?'left':'border-right'">{{th}}</th>
+                    </tr>
+                    <tr v-for="tr in trs" v-if="tr.dd">
+                        <td class="avatar left">
+                            <img :src="tr.avatar"
+                                 style="width: 7.5rem; height: 7.5rem; background-color: #eee; border-radius: 3.75rem;">
+                            <div>{{tr.name}}</div>
+                        </td>
+                        <td class="today border-right border-bottom" v-html="tr.today"></td>
+                        <td class="process border-right border-bottom">
+                            <div class="d-flex flex-wrap pointer" @click.stop="showAction">
+                                <div class="card" v-for="p in tr.process" @click.stop="deleteAction">
+                                    <div>{{p.time}}</div>
+                                    <div>{{p.action}}</div>
+                                    <div>{{p.status}}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="love border-right border-bottom">
+                            <div v-if="tr.love">{{tr.love}}</div>
+                            <div v-else="">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <div class="gotolove" @click.stop="showLove=true">进行叮咛</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="border-bottom">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <div class="sent pointer" v-if="tr.sendStatus">已发送</div>
+                                <div class="send pointer" v-else="">发送</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr v-else>
+                        <td class="avatar left">
+                            <img :src="tr.avatar"
+                                 style="width: 7.5rem; height: 7.5rem; background-color: #eee; border-radius: 3.75rem;">
+                            <div>{{tr.name}}</div>
+                        </td>
+                        <td class="today border-right border-bottom">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <div class="signin" @click.stop="signinShow = true">入园</div>
+                            </div>
+                        </td>
+                        <td class="process border-right border-bottom">
+
+                        </td>
+                        <td class="love border-right border-bottom">
+                            <div>{{tr.love}}</div>
+                        </td>
+                        <td class="border-bottom">
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!--            爱的叮咛弹窗-->
+            <div class="alert love" v-if="showLove">
+                <div class="alert-content">
+                    <div class="alert-close" @click="showLove=false"><img src="/img/alert/close.png"
+                                                                          style="width: 1.5rem; height: 1.5rem;" alt>
+                    </div>
+                    <div class="d-flex d-flex justify-content-between">
+                        <textarea class="loveInsert" v-model="loveText"></textarea>
+                        <div class="complete pointer" @click="completeLove">完成</div>
+                    </div>
+                    <div class="table">
+                        <table>
+                            <tr v-for="l in loveHistories">
+                                <td class="pointer" @click="loveText=l">{{l}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--            入园弹窗-->
+            <div v-if="signinShow" class="alert signin">
+                <div class="alert-content align-items-start">
+                    <div class="title fs-18 cl-333">请选择入园体温</div>
+                    <div>
+                        <input hidden type="radio" name="temp" id="temp-normal" checked><label class="radio"
+                                                                                               for="temp-normal">正常</label>
+                    </div>
+                    <div>
+                        <input hidden type="radio" name="temp" id="temp-low"><label class="raio"
+                                                                                    for="temp-low">偏低</label>
+                        <input class="bg-light fs-09" type="text" placeholder="请输入详细情况">
+                    </div>
+                    <div>
+                        <input hidden type="radio" name="temp" id="temp-high"><label class="" for="temp-high">偏高</label>
+                        <input class="bg-light fs-09" type="text" placeholder="请输入详细情况">
+                    </div>
+                    <div class="d-flex full-width justify-content-end align-items-end">
+                        <div class="cancel cl-666 fs-14 pointer" @click.stop="signinShow=false">取消</div>
+                        <div class="submit text-white pointer">确定</div>
+                    </div>
+                </div>
+            </div>
+            <!--            添加事件-->
+            <div v-if="actionShow" class="alert action">
+                <div class="alert-content">
+                    <div class="alert-close" @click.stop="actionShow=false"><img src="/img/alert/close.png"
+                                                                                 style="width: 1.5rem; height: 1.5rem;"
+                                                                                 alt></div>
+                    <div class="types d-flex align-items-center justify-content-between">
+                        <div v-for="(t,idx) in actionTypes" class="type d-flex flex-column align-items-center"
+                             :class="idx==actionType?'active':''" @click.stop="actionType=idx">
+                            <img :src="'/img/action/'+t.img" style="width: 3rem; height: 3rem;" alt="">
+                            <div class="fs-10">{{t.title}}</div>
+                        </div>
+                    </div>
+                    <!--                    量体温-->
+                    <div v-if="actionType==0">
+                        <div class="d-flex align-items-center action-row">
+                            <div class="fs-15 cl-333 title">时间</div>
+                            <div class="align-items-center cl-666">
+                                <input type="text" class="time-input bg-light fs-12 cl-666">时 <input type="text"
+                                                                                                     class="time-input bg-light fs-12 cl-666">分
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center action-row">
+                            <div class="fs-15 cl-333 title">状态</div>
+                            <div class="radio-container">
+                                <input type="radio" checked name="action-temp-input" id="action-temp-normal"
+                                       hidden><label for="action-temp-normal" class="fs-12 cl-666">正常</label>
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" name="action-temp-input" id="action-temp-low" hidden><label
+                                    for="action-temp-low" class="fs-12 cl-666">偏低</label>
+                                <input type="text" class="bg-light fs-09" placeholder="特殊情况请说明">
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" name="action-temp-input" id="action-temp-high" hidden><label
+                                    for="action-temp-high" class="fs-12 cl-666">偏高</label>
+                                <input type="text" class="bg-light fs-09" placeholder="特殊情况请说明">
+                            </div>
+                        </div>
+                    </div>
+                    <!--                    吃点心-->
+                    <div v-if="actionType==1">
+                        <div class="d-flex">
+                            <div class="d-flex align-items-center action-row">
+                                <div class="fs-15 cl-333 title">时间</div>
+                                <div class="align-items-center cl-666">
+                                    <input type="text" class="time-input bg-light fs-12 cl-666">时 <input type="text"
+                                                                                                         class="time-input bg-light fs-12 cl-666">分
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center action-row ">
+                            <div class="fs-15 cl-333 title">状态</div>
+                            <div class="radio-container">
+                                <input type="radio" checked name="action-temp-input" id="action-dessert-normal"
+                                       hidden><label for="action-temp-normal" class="fs-12 cl-666">正常</label>
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" name="action-temp-input" id="action-dessert-low" hidden><label
+                                    for="action-temp-low" class="fs-12 cl-666">量少</label>
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" name="action-temp-input" id="action-dessert-high" hidden><label
+                                    for="action-temp-high" class="fs-12 cl-666">量多</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!--                    换尿布-->
+                    <div v-if="actionType==2" class="full-width fs-12 cl-666">
+                        <div class="d-flex align-items-center action-row full-width justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <div class="fs-15 cl-333 title">时间</div>
+                                <div class="align-items-center cl-666">
+                                    <input type="text" class="time-input bg-light fs-12 cl-666">时 <input type="text"
+                                                                                                         class="time-input bg-light fs-12 cl-666">分
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="fs-15 cl-333 title">状态</div>
+                                <div class="radio-container">
+                                    <input type="radio" hidden name="action-diaper-status" id="action-diaper-urine">
+                                    <label for="action-diaper-urine">解尿</label>
+                                </div>
+                                <div class="radio-container">
+                                    <input type="radio" hidden name="action-diaper-status" id="action-diaper-dung">
+                                    <label for="action-diaper-dung">解尿</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center action-row full-width justify-content-between">
+                            <div class="d-flex">
+                                <div class="fs-15 cl-333 title">颜色</div>
+                                <div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="radio-container">
+                                            <input type="radio" hidden name="action-diaper-color"
+                                                   id="action-diaper-normal">
+                                            <label for="action-diaper-normal">正常</label>
+                                        </div>
+                                        <div class="radio-container">
+                                            <input type="radio" hidden name="action-diaper-color"
+                                                   id="action-diaper-green">
+                                            <label for="action-diaper-green">偏绿</label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="radio-container">
+                                            <input type="radio" hidden name="action-diaper-color"
+                                                   id="action-diaper-black">
+                                            <label for="action-diaper-black">偏黑</label>
+                                        </div>
+                                        <div class="radio-container">
+                                            <input type="radio" hidden name="action-diaper-color"
+                                                   id="action-diaper-other">
+                                            <label for="action-diaper-other">其他</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="fs-15 cl-333 title">性质</div>
+                                <div>
+                                    <div class="radio-container">
+                                        <input type="radio" hidden name="action-diaper-nature"
+                                               id="action-diaper-nature-normal">
+                                        <label for="action-diaper-nature-normal">正常</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" hidden name="action-diaper-nature"
+                                               id="action-diaper-nature-sparse">
+                                        <label for="action-diaper-nature-sparse">稀</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="radio-container">
+                                        <input type="radio" hidden name="action-diaper-nature"
+                                               id="action-diaper-nature-hard">
+                                        <label for="action-diaper-nature-hard">硬</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" hidden name="action-diaper-nature"
+                                               id="action-diaper-nature-other">
+                                        <label for="action-diaper-nature-other">其他</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--                    吃饭-->
+                    <div v-if="actionType==3">
+                        <div class="d-flex align-items-center action-row">
+                            <div class="fs-15 cl-333 title">时间</div>
+                            <div class="align-items-center cl-666">
+                                <input type="text" class="time-input bg-light fs-12 cl-666">时 <input type="text"
+                                                                                                     class="time-input bg-light fs-12 cl-666">分
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center action-row">
+                            <div class="fs-15 cl-333 title">状态</div>
+                            <div class="align-items-center cl-666 d-flex align-items-center">
+                                <div class="radio-container">
+                                    <input type="radio" hidden checked name="action-eat" id="action-eat-normal">
+                                    <label for="action-eat-normal">正常</label>
+                                </div>
+                                <div class="radio-container">
+                                    <input type="radio" hidden name="action-eat" id="action-eat-low">
+                                    <label for="action-eat-low">量少</label>
+                                </div>
+                                <div class="radio-container">
+                                    <input type="radio" hidden name="action-eat" id="action-eat-high">
+                                    <label for="action-eat-high">量多</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--                    午睡-->
+                    <div v-if="actionType==4">
+                        <div class="d-flex action-row">
+                            <div class="title fs-15 cl-333">时间</div>
+                            <div class="d-flex align-items-center fs-12 cl-666">
+                                <input type="text" class="time-input bg-light">时
+                                <input type="text" class="time-input bg-light">分
+                                <div class="action-sleep-sep"></div>
+                                <input type="text" class="time-input bg-light">时
+                                <input type="text" class="time-input bg-light">分
+                            </div>
+                        </div>
+                        <div class="action-row fs-12 cl-666 d-flex">
+                            <div class="d-flex">
+                                <div class="title fs-15 cl-333">状态</div>
+                                <div>
+                                    <div class="radio-container">
+                                        <input type="radio" hidden name="action-sleep-status" id="action-sleep-great">
+                                        <label for="action-sleep-great">安稳</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" hidden name="action-sleep-status" id="action-sleep-bad">
+                                        <label for="action-sleep-bad">不安稳</label>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <div class="radio-container">
+                                        <input type="radio" checked hidden name="action-sleep-status" id="action-sleep-normal">
+                                        <label for="action-sleep-normal">普通</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" hidden name="action-sleep-status" id="action-sleep-fear">
+                                        <label for="action-sleep-fear">易惊醒</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="d-flex justify-content-between align-items-end">
+                                    <div class="title">异常原因</div>
+                                    <div class="cl-999 fs-09">10字以内</div>
+                                </div>
+                                <textarea name="action-sleep-reason" id="action-sleep-reason" cols="30" rows="10"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!--                    喝奶-->
+                    <div v-if="actionType==5" class="full-width cl-666 fs-12">
+                        <div class="action-row d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <div class="title">时间</div>
+                                <input type="text" class="time-input bg-light">时
+                                <input type="text" class="time-input bg-light">分
+                            </div>
+                            <div class="d-flex">
+                                <div class="title">项目</div>
+                                <div class="radio-container">
+                                    <input type="radio" hidden name="action-milk-prj" id="action-milk-prj-mom">
+                                    <label for="action-milk-prj-mom">母乳</label>
+                                </div>
+                                <div class="radio-container">
+                                    <input type="radio" hidden name="action-milk-prj" id="action-milk-prj-other">
+                                    <label for="action-milk-prj-other">配方奶</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action-row d-flex justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <div class="title">奶量</div>
+                                <input type="text" class="time-input bg-light"> CC
+                            </div>
+                            <div class="d-flex ">
+                                <div class="title">食量</div>
+                                <div>
+                                    <div class="radio-container">
+                                        <input type="radio" hidden name="action-milk-count" id="action-milk-count-normal">
+                                        <label for="action-milk-count-normal">正常</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" hidden name="action-milk-count" id="action-milk-count-low">
+                                        <label for="action-milk-count-low">正常</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="radio-container">
+                                        <input type="radio" hidden name="action-milk-count" id="action-milk-count-high">
+                                        <label for="action-milk-count-high">量多</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action-row d-flex ">
+                            <div class="title">米/麦精</div>
+                            <div class="radio-container">
+                                <input type="radio" hidden name="action-milk-wheat" id="action-milk-wheat-no">
+                                <label for="action-milk-wheat-no">无</label>
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" hidden name="action-milk-wheat" id="action-milk-wheat-yes">
+                                <label for="action-milk-wheat-yes">有</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="submit pointer" @click.stop="actionShow=false">完成</div>
+                </div>
+            </div>
+            <!--            删除事件-->
+            <delete-alert v-if="actionDelete"
+                          @close="actionDelete=false"
+                          title="你确定删除该叮咛吗"
+                          content="删除后不可找回, 请谨慎操作"
+                          @submit="">
+            </delete-alert>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/v/v-cv.js"></script>
+<script type="module" src="/j/t/index.js"></script>
+</html>

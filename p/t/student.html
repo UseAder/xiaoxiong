@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+
+    <script src="/v/cj.js"></script>
+
+    <link rel="stylesheet" href="/c/t/student.css">
+</head>
+<body>
+<div id="app" class="container-fluid full-height d-flex flex-column">
+    <navigator nickname="二大爷"></navigator>
+    <div class="d-content full-height d-flex">
+        <div class="content">
+            <div class="table">
+                <table>
+                    <tr>
+                        <th v-for="th in ths">{{th}}</th>
+                    </tr>
+                    <tr v-for="(row,idx) in rows" :class="idx%2==0?'white':'blue'">
+                        <td>{{row.number}}</td>
+                        <td><img :src="row.avatar" style="width: 4rem; height: 4rem; border-radius: 50%" alt=""></td>
+                        <td>{{row.name}}</td>
+                        <td>{{row.cls}}</td>
+                        <td>{{row.gender}}</td>
+                        <td>{{row.age}}</td>
+                        <td>{{row.height}}cm</td>
+                        <td>{{row.weight}}kg</td>
+                        <td>
+                            <div>{{row.teacher.name}}</div>
+                            <div>({{row.teacher.phone}})</div>
+                        </td>
+                        <td>{{row.guardian}}</td>
+                        <td>{{row.phone}}</td>
+                        <td>{{row.address}}</td>
+                        <td class="funcBtn">
+                            <div class="full-width d-flex justify-content-between">
+                                <div class="pointer" @click.stop="showWechat"><img src="/img/cell/wechat.png"
+                                                                                   style="width: 1.3rem; height: 1.2rem;">
+                                </div>
+                                <div class="pointer" @click.stop="showReport"><img src="/img/cell/report.png"
+                                                                                   style="width: 1.3rem; height: 1.2rem;"
+                                                                                   alt=""></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <submit-alert v-if="wechatShow" @close="closeWechat" @submit="submitWechat">
+                <div class="d-flex wechat-show">
+                    <div>监护人：</div>
+                    <div class="d-flex guardian-cell flex-column align-items-center justify-content-center"
+                         v-for="g in guardians">
+                        <img :src="g.avatar" style="width: 4.3rem; height: 4.3rem; border-radius: 50%;" alt="">
+                        <div class="fs-09">{{g.name}}</div>
+                    </div>
+                    <div class="add-btn" @click.stop="guardianAdd">添加</div>
+                </div>
+                <div class="d-flex wechat-show family">
+                    <div>监护人：</div>
+                    <div class="d-flex guardian-cell flex-column align-items-center justify-content-center"
+                         v-for="g in guardians">
+                        <img :src="g.avatar" style="width: 4.3rem; height: 4.3rem; border-radius: 50%;" alt="">
+                        <div class="fs-09">{{g.name}}</div>
+                    </div>
+                    <div class="add-btn" @click.stop="familyAdd">添加</div>
+                </div>
+            </submit-alert>
+            <div v-if="addWechatShow" class="alert add-wechat">
+                <div class="alert-content">
+                    <div class="alert-close" @click.stop="closeAddWechat"><img src="/img/alert/close.png"
+                                                                               style="width: 1.5rem; height: 1.5rem;"
+                                                                               alt></div>
+                    <div class="search d-flex align-items-center">
+                        <div class="search-area">
+                            <img src="/img/content/search.png" style="width: 1.1rem; height: 1.2rem;">
+                            <input type="text" placeholder="输入监护人ID搜索">
+                        </div>
+                        <div class="search-btn pointer" @click.stop="searchGuardian">搜索</div>
+                    </div>
+                    <div class="collection full-width d-flex flex-wrap">
+                        <div class="item d-flex align-items-center pointer">
+                            <img src="/img/placeholder/guardian.png"
+                                 style="width: 3rem; height: 3rem; margin-right: 0.55rem;" alt="">
+                            <div>
+                                <div class="cl-333 fs-10">在在爸爸</div>
+                                <div class="id">ID: 0000001</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-if="reportShow" class="alert">
+                <div class="alert-content report-show clear">
+                    <div class="alert-close" @click.stop="closeReport"><img src="/img/alert/close.png"
+                                                                          style="width: 1.5rem; height: 1.5rem;" alt>
+                    </div>
+                    <div class="table bg-white">
+                        <table>
+                            <tr v-for="(r, idx) in reports" :class="idx%2==0?'white':'blue'">
+                                <td class="number border-right">{{r.number}}</td>
+                                <td class="date border-right">{{r.date}}</td>
+                                <td class="funcBtn">
+                                    <div class="full-width d-flex align-items-center justify-content-center">
+                                        <img class="pointer" src="/img/student/download.png" style="width: 1.2rem; height: 1.2rem;" alt="">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/v/v-cv.js"></script>
+<script src="/j/t/student.js"></script>
+</html>
