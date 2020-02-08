@@ -2,7 +2,7 @@
 
 NGINX配置index页为p/login.html
 
-目录含义:
+目录含义:111
 所有目录的a和t分别代表 管理员端 教师端  
 j: js
 p: html
